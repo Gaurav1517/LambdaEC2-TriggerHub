@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lambda with AI Agent</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #1f2937;
+      color: white;
+      padding: 16px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar img {
+      height: 30px;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .heading-box {
+      background: linear-gradient(135deg, #ff9900, #ffcc00);
+      color: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .heading-box img {
+      height: 32px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .start-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .stop-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 16px 30px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <img src="https://a0.awsstatic.com/libra-css/images/logos/aws_smile-header-desktop-en-white_59x35.png" alt="AWS Logo">
+    EC2 Custom Control Panel
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="container">
+      <div class="heading-box">
+        <img src="https://img.icons8.com/?size=100&id=Y9Kxy8Xl1id8&format=png&color=000000" alt="Lambda Logo">
+        Lambda with AI agent
+      </div>
+      <p>Manage your EC2 instance</p>
+      <div class="buttons">
+        <button class="start-btn" onclick="triggerLambda('start')">Start</button>
+        <button class="stop-btn" onclick="triggerLambda('stop')">Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Lambda EC2 Control Panel. Powered by AWS & AI.
+  </footer>
+
+  <script>
+    function triggerLambda(action) {
+      const lambdaUrls = {
+        start: 'https://0sew8b32el.execute-api.us-east-1.amazonaws.com/default/startEC2Instance',
+        stop: 'https://emd3uhm6y5.execute-api.us-east-1.amazonaws.com/default/stopEC2Instance'
+      };
+
+      const url = lambdaUrls[action];
+
+      fetch(url, { method: 'POST' })
+        .then(response => {
+          if (response.ok) {
+            alert(`${action.toUpperCase()} command sent successfully!`);
+          } else {
+            alert(`Failed to send ${action} command.`);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while triggering the Lambda function.');
+        });
+    }
+  </script>
+
+</body>
+</html>
+<!-- Prompt to Generate a Web Page with Features:
+
+"Please generate an attractive web page with the following features:
+
+    Navbar:
+
+        A dark-colored navbar with a white AWS logo (or any placeholder logo) on the left, followed by the text "EC2 Control Panel".
+
+        Use a shadow effect to make it stand out.
+
+    Main Content:
+
+        A rectangular container with rounded corners and a drop shadow.
+
+        A heading box with a gradient background (e.g., orange to yellow) that contains the text "Lambda with AI Agent" and an icon of the AWS Lambda service.
+
+        A description paragraph: "Manage your EC2 instance".
+
+        Two buttons:
+
+            Green Start button: When clicked, it triggers a Lambda function to start an EC2 instance (API call).
+
+            Red Stop button: When clicked, it triggers a Lambda function to stop an EC2 instance (API call).
+
+        Make sure the buttons have hover and active states.
+
+    Footer:
+
+        A footer with a dark background (#1f2937), white text, and centered text that says: "© 2025 Lambda EC2 Control Panel. Powered by AWS & AI."
+
+    Style & Colors:
+
+        The page should have a clean, modern design with gradients, shadows, and vibrant colors.
+
+        Use a flexible layout (e.g., flexbox) to ensure the footer stays at the bottom of the page.
+
+    Functionality:
+
+        Use JavaScript to trigger the Lambda functions (start and stop EC2 instances) when the buttons are clicked. Provide placeholders for the Lambda API URLs.
+
+Make sure the page is fully responsive and looks great on both desktop and mobile screens." -->
+
